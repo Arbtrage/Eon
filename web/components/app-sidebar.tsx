@@ -14,10 +14,11 @@ import {
   Settings2,
   SquareTerminal,
 } from "lucide-react"
+import { signOut } from "next-auth/react"
 
 import { NavMain } from "@/components/nav-main"
 import { Separator } from "@/components/ui/separator"
-import { Button } from "@/components/ui/button"  
+import { Button } from "@/components/ui/button"
 import {
   Sidebar,
   SidebarContent,
@@ -41,7 +42,7 @@ const data = {
       icon: SquareTerminal,
       isActive: true,
       items: [
-        
+
       ],
     },
     {
@@ -50,7 +51,7 @@ const data = {
       icon: SquareTerminal,
       isActive: true,
       items: [
-        
+
       ],
     },
     {
@@ -58,7 +59,7 @@ const data = {
       url: "/data-sources",
       icon: Bot,
       items: [
-        
+
       ],
     },
     {
@@ -66,7 +67,7 @@ const data = {
       url: "/agents",
       icon: BookOpen,
       items: [
-        
+
       ],
     },
     {
@@ -74,11 +75,11 @@ const data = {
       url: "/settings",
       icon: Settings2,
       items: [
-        
+
       ],
     },
   ],
-  
+
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -106,10 +107,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
       <SidebarFooter>
         <Separator />
-        <Button variant="ghost" className="w-full justify-between flex flex-row text-md gap-2">
+        <Button variant="ghost" className="w-full justify-between flex flex-row text-md gap-2" onClick={() => signOut()}>
           Logout <LogOut className="size-4" />
         </Button>
-        {/* <NavUser user={data.user} /> */}
       </SidebarFooter>
     </Sidebar>
   )

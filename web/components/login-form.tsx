@@ -6,6 +6,9 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useState } from "react"
+import { signIn } from "next-auth/react"
+import { toast } from "sonner"
+import { useRouter } from "next/navigation"
 
 export function LoginForm({
   className,
@@ -13,10 +16,28 @@ export function LoginForm({
 }: React.ComponentProps<"div">) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const router = useRouter()
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log("Form submitted")
+
+    try {
+      const result = await signIn("login", {
+        email,
+        password,
+        redirect: false,
+      })
+
+      if (result?.error) {
+        toast.error("Invalid credentials")
+        return
+      }
+
+      router.push("/dashboard")
+      toast.success("Logged in successfully")
+    } catch (error) {
+      toast.error("Something went wrong")
+    }
   }
 
   return (
