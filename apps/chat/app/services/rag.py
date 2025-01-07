@@ -11,8 +11,9 @@ class RAGService:
         self.embedding_service_url = settings.EMBEDDING_SERVICE_URL
         self.client = httpx.AsyncClient(timeout=30.0)
 
-    async def get_relevant_context(self, query: str, k: int = 3) -> List[str]:
-        """Get relevant context from the embedding service."""
+    async def get_relevant_context(
+        self, user_id: str, query: str, k: int = 3
+    ) -> List[str]:
         try:
             response = await self.client.post(
                 f"{self.embedding_service_url}{settings.EMBEDDING_SERVICE_ENDPOINT}",

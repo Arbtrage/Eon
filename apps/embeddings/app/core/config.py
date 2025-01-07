@@ -12,12 +12,12 @@ class Settings(BaseSettings):
     # Milvus settings
     MILVUS_HOST: str = "127.0.0.1"
     MILVUS_PORT: str = "19530"
-    COLLECTION_NAME: str = "readme_embeddings"
+    COLLECTION_NAME: str = "embeddings"
 
-    # Google API settings
-    GOOGLE_API_KEY: str
-    GEMINI_EMBEDDING_MODEL: str = "models/embedding-001"
-    GEMINI_CHAT_MODEL: str = "gemini-pro"
+    # OpenAI API settings
+    OPENAI_API_KEY: str
+    OPENAI_EMBEDDING_MODEL: str = "text-embedding-ada-002"
+    OPENAI_CHAT_MODEL: str = "gpt-3.5-turbo"
 
     class Config:
         env_file = ".env"

@@ -1,4 +1,4 @@
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from app.core.config import get_settings
 from app.core.exceptions import EmbeddingError
 
@@ -7,10 +7,10 @@ settings = get_settings()
 
 class EmbeddingService:
     def __init__(self):
-        print("🚀 Initializing Embedding Service with Gemini model...")
-        self.embeddings_model = GoogleGenerativeAIEmbeddings(
-            model=settings.GEMINI_EMBEDDING_MODEL,
-            google_api_key=settings.GOOGLE_API_KEY,
+        print("🚀 Initializing Embedding Service with OpenAI model...")
+        self.embeddings_model = OpenAIEmbeddings(
+            model=settings.OPENAI_EMBEDDING_MODEL,
+            api_key=settings.OPENAI_API_KEY,
         )
 
     def create_embeddings(self, texts: list[str]) -> list:

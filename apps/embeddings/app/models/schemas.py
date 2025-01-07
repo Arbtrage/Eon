@@ -1,16 +1,10 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from typing import List, Optional
 
 
 class TextRequest(BaseModel):
-    text: str = Field(..., description="Text to be processed or searched")
-
-    class Config:
-        json_schema_extra = {
-            "example": {
-                "text": "This is a sample text that needs to be processed or searched."
-            }
-        }
+    text: str
+    user_id: str
 
 
 class SearchResult(BaseModel):
