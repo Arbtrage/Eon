@@ -1,84 +1,159 @@
-# Turborepo starter
+# **Agentic API Support Chatbot**  
+An advanced RAG (Retrieval-Augmented Generation) chatbot that ingests API documentation, answers user queries, and validates API calls. Built to assist developers in real-time with API exploration, troubleshooting, and execution.  
 
-This is an official starter Turborepo.
+---
 
-## Using this example
+## **Table of Contents**  
+1. [Overview](#overview)  
+2. [Features](#features)  
+3. [Architecture](#architecture)  
+4. [Technologies Used](#technologies-used)  
+5. [Getting Started](#getting-started)  
+6. [Usage](#usage)  
+7. [Deployment](#deployment)  
+8. [Future Enhancements](#future-enhancements)  
+9. [Contributing](#contributing)  
+10. [License](#license)  
 
-Run the following command:
+---
 
-```sh
-npx create-turbo@latest
-```
+## **1. Overview**  
+The **Agentic API Support Chatbot** leverages Retrieval-Augmented Generation to provide intelligent and contextual responses to user queries based on your API documentation. Its capabilities include:  
+- Parsing and storing API documentation in a structured knowledge base.  
+- Answering user queries with high accuracy.  
+- Running API calls on behalf of the user and validating their correctness.  
+- Suggesting fixes for errors in API calls.  
 
-## What's inside?
+This chatbot aims to enhance productivity for developers by simplifying API exploration and troubleshooting.  
 
-This Turborepo includes the following packages/apps:
+---
 
-### Apps and Packages
+## **2. Features**  
+- **Knowledge Ingestion**: Automatically processes and ingests API documentation to build a semantic knowledge base.  
+- **Query Handling**: Answers user questions using GPT-powered models and retrieves relevant information using embeddings.  
+- **API Validation**: Executes API calls, checks for errors, and suggests fixes to ensure correct implementation.  
+- **Slack Integration**: Seamless interaction within Slack channels, responding to specific user queries in real time.  
+- **Dynamic Updates**: Supports updating the knowledge base with new documentation and user feedback.  
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+---
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+## **3. Architecture**  
 
-### Utilities
+### **High-Level Architecture**  
+1. **API Gateway**: Routes requests to microservices.  
+2. **Knowledge Ingestion Service**: Processes and stores API documentation.  
+3. **Chatbot Service**: Handles user interactions and query resolution.  
+4. **API Validation Service**: Executes and validates user-provided API calls.  
+5. **Search Service**: Performs semantic search on the knowledge base using vector embeddings.  
+6. **Slack Integration Service**: Facilitates real-time bot interactions in Slack.  
 
-This Turborepo has some additional tools already setup for you:
+### **Flow Diagram**  
+```plaintext  
+User -> API Gateway -> Microservices:  
+  - Chatbot Service  
+  - Knowledge Ingestion Service  
+  - API Validation Service  
+  - Slack Integration Service  
+  - Search Service  
+```  
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+---
 
-### Build
+## **4. Technologies Used**  
+- **Backend**: FastAPI, Python  
+- **LLM**: OpenAI GPT via LangChain  
+- **Database**: MongoDB (NoSQL) for text storage and Milvus for vector embeddings  
+- **Search**: Semantic search powered by FAISS  
+- **Slack Integration**: Slack APIs  
+- **Containerization**: Docker (microservices in isolated containers)  
+- **Orchestration**: TurboRepo for managing monorepo architecture  
 
-To build all apps and packages, run the following command:
+---
 
-```
-cd my-turborepo
-pnpm build
-```
+## **5. Getting Started**  
 
-### Develop
+### **Prerequisites**  
+- Python (>=3.9)  
+- Docker and Docker Compose  
+- MongoDB and Milvus running locally or on a cloud instance  
+- OpenAI API key  
+- Slack App credentials (Bot Token, Signing Secret)  
 
-To develop all apps and packages, run the following command:
+### **Setup Instructions**  
+1. **Clone the repository**:  
+   ```bash  
+   git clone https://github.com/your-repo/agentic-api-chatbot.git  
+   cd agentic-api-chatbot  
+   ```  
 
-```
-cd my-turborepo
-pnpm dev
-```
+2. **Install dependencies**:  
+   ```bash  
+   pip install -r requirements.txt  
+   ```  
 
-### Remote Caching
+3. **Environment Variables**:  
+   Create a `.env` file in the root directory:  
+   ```env  
+   OPENAI_API_KEY=your_openai_key  
+   MONGO_URI=your_mongo_uri  
+   MILVUS_HOST=localhost  
+   MILVUS_PORT=19530  
+   SLACK_BOT_TOKEN=your_slack_bot_token  
+   SLACK_SIGNING_SECRET=your_signing_secret  
+   ```  
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+4. **Run the services with Docker**:  
+   ```bash  
+   docker-compose up --build  
+   ```  
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+5. **Access the services**:  
+   - API Gateway: `http://localhost:8000`  
+   - Slack bot: Add it to your Slack workspace.  
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+---
 
-```
-cd my-turborepo
-npx turbo login
-```
+## **6. Usage**  
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+### **Chatbot Query**  
+- Interact with the chatbot through the web app or Slack.  
+- Example query:  
+  > *"How do I authenticate using Crustdata API?"*  
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+### **API Validation**  
+- Provide an API call (e.g., HTTP request), and the bot will validate and suggest fixes.  
 
-```
-npx turbo link
-```
+---
 
-## Useful Links
+## **7. Deployment**  
 
-Learn more about the power of Turborepo:
+### **Cloud Deployment**  
+- Use platforms like AWS, GCP, or Azure to deploy microservices.  
+- Recommended setup:  
+  - Use **Kubernetes** for container orchestration.  
+  - Set up CI/CD pipelines using GitHub Actions.  
 
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+---
+
+## **8. Future Enhancements**  
+- Add support for additional channels like Teams or Discord.  
+- Implement multilingual support.  
+- Extend API validation to suggest alternative APIs.  
+- Enhance Slack bot for multi-user context tracking.  
+
+---
+
+## **9. Contributing**  
+Contributions are welcome! Follow these steps:  
+1. Fork the repository.  
+2. Create a feature branch.  
+3. Submit a pull request with details about your changes.  
+
+---
+
+## **10. License**  
+This project is licensed under the MIT License. See `LICENSE` file for details.  
+
+---  
+
+This README provides a detailed guide for developers and stakeholders, emphasizing the project's utility and scalability while offering clear setup instructions.
