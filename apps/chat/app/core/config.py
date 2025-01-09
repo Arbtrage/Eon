@@ -1,5 +1,6 @@
 from pydantic_settings import BaseSettings
 from functools import lru_cache
+import os
 
 
 class Settings(BaseSettings):
@@ -8,7 +9,7 @@ class Settings(BaseSettings):
     PROJECT_NAME: str = "RAGing Service"
 
     # LLM Settings
-    OPENAI_API_KEY: str = "your-api-key"
+    OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY")
     MODEL_NAME: str = "gpt-3.5-turbo"
     TEMPERATURE: float = 0.7
 
@@ -17,7 +18,7 @@ class Settings(BaseSettings):
 
     # Embedding Service Settings
     EMBEDDING_SERVICE_URL: str = "http://localhost:8000"
-    EMBEDDING_SERVICE_ENDPOINT: str = "/retrieve"  # Add this if needed
+    EMBEDDING_SERVICE_ENDPOINT: str = "/api/retrieve"
 
     class Config:
         env_file = ".env"

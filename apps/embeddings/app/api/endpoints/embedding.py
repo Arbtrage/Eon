@@ -5,7 +5,6 @@ from app.services.text_service import TextService
 from app.db.milvus import MilvusDB
 from unstructured.partition.md import partition_md
 from langchain.document_loaders import UnstructuredFileLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter, MarkdownTextSplitter
 import logging
 import os
 

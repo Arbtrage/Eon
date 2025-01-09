@@ -135,7 +135,7 @@ class MilvusDB:
                 anns_field="embedding",
                 param=search_params,
                 limit=limit,
-                expr=f'user_id == "{user_id}"',
+                # expr=f'user_id == "{user_id}"',
                 output_fields=["text", "user_id"],
             )
 

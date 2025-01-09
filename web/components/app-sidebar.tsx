@@ -5,7 +5,7 @@ import {
   BookOpen,
   Bot,
   Command,
-  Frame,
+  File,
   LifeBuoy,
   LogOut,
   Map,
@@ -37,8 +37,8 @@ const data = {
   },
   navMain: [
     {
-      title: "Dashboard",
-      url: "/dashboard",
+      title: "Chat",
+      url: "/chat",
       icon: SquareTerminal,
       isActive: true,
       items: [
@@ -46,9 +46,9 @@ const data = {
       ],
     },
     {
-      title: "Chats",
-      url: "/chats",
-      icon: SquareTerminal,
+      title: "Documents",
+      url: "/documents",
+      icon: File,
       isActive: true,
       items: [
 
